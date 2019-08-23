@@ -20,7 +20,9 @@ This repository consists of dockerfiles for cuda and deep learning libraries. Cu
 | --- | --------- | ------- |
 | vipml/cuda:9.0 | Ubuntu<br>nVidia driver<br>CUDA<br>cuDNN | 16.04<br>418.67<br>9.0.176<br>7.1.4.18 |
 | vipml/cuda:10.0 | Ubuntu<br>nVidia driver<br>CUDA<br>cuDNN | 16.04<br>418.67<br>10.0.130<br>7.5.1.10 |
+
 <br>
+
 | Tag | CUDA | Libraries | Version |
 | --- | ---- | --------- | ------- |
 | vipml/pytorch:0.3.1 | vipml/cuda:10.0 | PyTorch<br>TorchVision | 0.3.1<br>0.2.2 |
