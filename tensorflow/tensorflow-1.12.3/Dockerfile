@@ -1,4 +1,4 @@
-FROM vipml/cuda:10.0
+FROM vipml/cuda:9.0
 MAINTAINER Jae-Seong Yun <jsyun@unist.ac.kr>
 
 # Install python
@@ -22,8 +22,8 @@ RUN mkdir /root/.pip && \
 RUN pip3 install wheel && \
   pip3 install matplotlib==2.2.4 numpy scipy opencv-python jupyter pydot h5py
 
-# Install pytorch
-RUN pip3 install torch==0.3.1 torchvision==0.2.2.post3
+# Install tensorflow
+RUN pip3 install tensorflow-gpu==1.12.3 keras tensorboard
 
 WORKDIR /root
 RUN wget https://raw.githubusercontent.com/jaeseongyun/ML_dockers/master/setup_jupyter_notebook.py

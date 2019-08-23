@@ -23,7 +23,7 @@ RUN pip3 install wheel && \
   pip3 install matplotlib==2.2.4 numpy scipy opencv-python jupyter pydot h5py
 
 # Install pytorch
-RUN pip3 install torch==0.3.1 torchvision==0.2.2.post3
+RUN pip3 install torch==1.2.0 torchvision==0.4.0
 
 WORKDIR /root
 RUN wget https://raw.githubusercontent.com/jaeseongyun/ML_dockers/master/setup_jupyter_notebook.py
