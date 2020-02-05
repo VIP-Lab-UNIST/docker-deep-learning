@@ -30,6 +30,7 @@ This repository consists of dockerfiles for cuda and deep learning libraries. Cu
 | vipml/pytorch:1.0.1 | vipml/cuda:10.0 | PyTorch<br>TorchVision | 1.0.1<br>0.2.2 |
 | vipml/pytorch:1.1.0 | vipml/cuda:10.0 | PyTorch<br>TorchVision | 1.1.0<br>0.3.0 |
 | vipml/pytorch:1.2.0 | vipml/cuda:10.0 | PyTorch<br>TorchVision | 1.2.0<br>0.4.0 |
+| vipml/pytorch:1.4.0 | vipml/cuda:10.0 | PyTorch<br>TorchVision | 1.4.0<br>0.5.0 |
 | vipml/tensorflow:1.12.3 | vipml/cuda:9.0 | Tensorflow<br>Keras | 1.12.3<br>2.2.4 |
 | vipml/tensorflow:1.13.2 | vipml/cuda:10.0 | Tensorflow<br>Keras | 1.13.2<br>2.2.4 |
 | vipml/tensorflow:1.14.0 | vipml/cuda:10.0 | Tensorflow<br>Keras | 1.14.0<br>2.2.4 |
