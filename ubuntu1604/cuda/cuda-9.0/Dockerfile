@@ -1,17 +1,25 @@
 FROM ubuntu:16.04
-MAINTAINER Jae-Seong Yun <jsyun@unist.ac.kr>
+LABEL os="ubuntu 16.04"
+LABEL cuda="9.2"
+LABEL nvidia_driver="440.64"
 
+# Set Korea ubuntu repository
 RUN sed -i 's/archive.ubuntu.com/kr.archive.ubuntu.com/g' /etc/apt/sources.list
 
 # Install wget and build-essential
 RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential \
   wget \
-  module-init-tools \
-  tzdata
+  module-init-tools 
 
-# Install cuda 9.0
-# Driver Version: 418.67
+# Set up timezone 
+ENV DEBIAN_FRONTEND=noninteractive
+RUN ln -fs /usr/share/zoneinfo/Asia/Seoul /etc/localtime && \ 
+  apt-get install -y --no-install-recommends tzdata && \
+  dpkg-reconfigure --frontend noninteractive tzdata  
+
+# Install cuda 9.2
+# Driver Version: 440.64
 # Change to the /tmp directory
 RUN cd /tmp && \
 # Add NVidia repositories.
@@ -23,28 +31,19 @@ RUN cd /tmp && \
   apt-get update && \
 # Install CUDA
   apt-get install -y --no-install-recommends \
-    nvidia-418=418.67-0ubuntu1 nvidia-418-dev=418.67-0ubuntu1 nvidia-libopencl1-418=418.67-0ubuntu1 \
-    nvidia-opencl-icd-418=418.67-0ubuntu1 nvidia-418-diagnostic=418.67-0ubuntu1 libcuda1-418=418.67-0ubuntu1 \
-    cuda-drivers=418.67-1 \
-    cuda-runtime-9-0  cuda-demo-suite-9-0 \
-    cuda-9-0 cuda-cublas-dev-9-0 cuda-cufft-dev-9-0 cuda-curand-dev-9-0 \
-    cuda-cusolver-dev-9-0 cuda-cusparse-dev-9-0 cuda-command-line-tools-9-0 \
-    libcudnn7=7.1.4.18-1+cuda9.0 libnccl2=2.2.13-1+cuda9.0 \
-    libcudnn7-dev=7.1.4.18-1+cuda9.0 libnccl-dev=2.2.13-1+cuda9.0 \
+    cuda-9-0 \
+    libcudnn7=7.1.4.18-1+cuda9.0 libcudnn7-dev=7.1.4.18-1+cuda9.0 \
     nvinfer-runtime-trt-repo-ubuntu1604-4.0.1-ga-cuda9.0 && \
-# Download TensorRT
+# Download TensorRT #TODO
   apt-get update && \
-  apt-get install -y --no-install-recommends libnvinfer4=4.1.2-1+cuda9.0 libnvinfer-dev=4.1.2-1+cuda9.0 && \
+  apt-get install -y --no-install-recommends \
+    libnvinfer4=4.1.2-1+cuda9.0 libnvinfer-dev=4.1.2-1+cuda9.0 && \ 
 # Clean up
   rm -rf *
 
 # Add to path
 ENV PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}} \
   LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/usr/local/cuda/extras/CUPTI/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} \
-  CUDA_HOME=/usr/local/cuda-9.0${CUDA_HOME:+:${CUDA_HOME}}
-
-# Set up timezone 
-RUN mv /etc/localtime /etc/localtime_org && \
-  ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime 
+  CUDA_HOME=/usr/local/cuda-9.0${CUDA_HOME:+:${CUDA_HOME}} 
 
 RUN  ["/bin/bash"]
